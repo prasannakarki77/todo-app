@@ -19,9 +19,9 @@ export const TodoProvider = ({ children }) => {
       id: Math.random(10000),
       completed: false,
     };
-    todoList.push(todo);
-    console.log("added");
-    console.log(todoList);
+    let oldTodoList = todoList.slice();
+    oldTodoList.push(todo);
+    setTodoList(oldTodoList);
   };
   const removeFromList = () => {};
   const completeTodo = (todo) => {

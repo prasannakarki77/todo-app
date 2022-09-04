@@ -3,11 +3,12 @@ import "../styles/body.scss";
 import { useContext } from "react";
 import { TodoContext } from "../context/Todo.context";
 const Todos = () => {
-  const { addToList } = useContext(TodoContext);
+  const { addToList, todoList, completeTodo } = useContext(TodoContext);
   const [todoText, setTodoText] = useState("");
   const addHandler = () => {
     addToList(todoText);
   };
+
   const checked = (e) => {
     if (e.target.value) {
       console.log("checked");
@@ -27,14 +28,23 @@ const Todos = () => {
           Add
         </button>
       </div>
-      <div className="todo">
-        <input type="checkbox" className="todo__checkbox" onChange={checked} />
-        <p className="todo__text">Do coding challenges</p>
-      </div>
-      <div className="todo">
-        <input type="checkbox" className="todo__checkbox" />
-        <p className="todo__text">Do coding challenges</p>
-      </div>
+      {todoList.map((todo) => (
+        <div className="todo" key={todo.id}>
+          <input
+            type="checkbox"
+            className="todo__checkbox"
+            defaultChecked={todo.completed}
+            onClick={() => completeTodo(todo)}
+          />
+          <p
+            className={`todo__text ${
+              todo.completed && "todo__text--completed"
+            }`}
+          >
+            {todo.todoText}
+          </p>
+        </div>
+      ))}
     </>
   );
 };
