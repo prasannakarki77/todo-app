@@ -5,10 +5,12 @@ export const TodoContext = createContext({
   addToList: () => {},
   removeFromList: () => {},
   completeTodo: () => {},
+  deleteAll: () => {},
 });
 
 export const TodoProvider = ({ children }) => {
   const [todoList, setTodoList] = useState([]);
+
   // useEffect(() => {
 
   // }, [todoList]);
@@ -23,7 +25,15 @@ export const TodoProvider = ({ children }) => {
     oldTodoList.push(todo);
     setTodoList(oldTodoList);
   };
-  const removeFromList = () => {};
+  const removeFromList = (todo) => {
+    let filteredList = todoList.filter((obj) => obj.id !== todo.id);
+
+    setTodoList(filteredList);
+  };
+  const deleteAll = () => {
+    let filteredList = todoList.filter((obj) => obj.completed !== true);
+    setTodoList(filteredList);
+  };
   const completeTodo = (todo) => {
     let oldTodoList = todoList.slice();
     for (const obj of oldTodoList) {
@@ -39,6 +49,7 @@ export const TodoProvider = ({ children }) => {
     todoList,
     addToList,
     removeFromList,
+    deleteAll,
     completeTodo,
   };
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
