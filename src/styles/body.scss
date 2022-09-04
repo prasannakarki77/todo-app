@@ -3,6 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 25px;
 
   &__field {
     border: 1px solid #bdbdbd;
@@ -31,6 +32,27 @@
     cursor: pointer;
     &:hover {
       background: #1e66c3;
+    }
+  }
+}
+
+.todo {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  font-weight: 500;
+  font-size: 18px;
+  font-family: "Montserrat";
+
+  &__checkbox {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  &__text {
+    &--completed {
+      text-decoration: line-through;
     }
   }
 }
