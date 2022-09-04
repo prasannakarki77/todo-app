@@ -25,7 +25,7 @@ export const TodoProvider = ({ children }) => {
   };
   const removeFromList = () => {};
   const completeTodo = (todo) => {
-    let oldTodoList = todoList;
+    let oldTodoList = todoList.slice();
     for (const obj of oldTodoList) {
       if (obj.id === todo.id) {
         obj.completed = !todo.completed;
